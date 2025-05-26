@@ -298,6 +298,34 @@ void GET_SCROLL_WHEEL(struct ParseState *Parser, struct Value *ReturnValue, stru
    getScrollWheel(Param[0]->Val->Pointer, Param[1]->Val->Pointer);
 }
 
+void LOAD_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
+{
+   ReturnValue->Val->Integer = loadSound(Param[0]->Val->Pointer);
+}
+void PLAY_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
+{
+   playSound(Param[0]->Val->Integer);
+}
+void LOOP_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
+{
+   loopSound(Param[0]->Val->Integer);
+}
+void SOUND_VOLUME(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
+{
+   soundVolume(Param[0]->Val->Integer, Param[1]->Val->FP);
+}
+void PAN_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
+{
+   panSound(Param[0]->Val->Integer, Param[1]->Val->FP);
+}
+void STOP_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
+{
+   stopSound(Param[0]->Val->Integer);
+}
+void UNLOAD_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
+{
+   unloadSound(Param[0]->Val->Integer);
+}
 
 void Clineno(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
 {
@@ -382,6 +410,14 @@ struct LibraryFunction UnixFunctions[] =
    { MOUSE_CLICK, "int mouseClick(int);" },
    { GET_CURSOR_POSITION, "int getCursorPosition(float *, float *);" },
    { GET_SCROLL_WHEEL, "int getScrollWheel(float *, float *);" },
+   
+   { LOAD_SOUND, "int loadSound(char *);" },
+   { PLAY_SOUND, "void playSound(int);" },
+   { LOOP_SOUND, "void loopSound(int);" },
+   { SOUND_VOLUME, "void soundVolume(int, float);" },
+   { PAN_SOUND, "void panSound(int, float);" },
+   { STOP_SOUND, "void stopSound(int);" },
+   { UNLOAD_SOUND, "void unloadSound(int);" },
    
    { Clineno, "int lineno();" },
    { NULL, NULL }
