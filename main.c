@@ -8,6 +8,7 @@
 #include <unistd.h> // for usleep
 #include "loadImg.h"
 #include "ascii.h"
+#include "audio.h"
 
 #include "picoc_modified/picoc.h"
 
@@ -1148,7 +1149,9 @@ int main()
    
    setCameraLens(viewStart, viewEnd, orth, unitPerPix, &persp, &zMov, &zSz);
    
-   int StackSize = 128 * 1024 * 1024; // space for the the stack
+   iniAudioEngine();
+
+   int StackSize = 128 * 1024 * 1024; // space for the stack
    PicocInitialise(StackSize);
    PicocIncludeAllSystemHeaders();
 
@@ -1164,6 +1167,9 @@ int main()
       PicocCleanup();
       printf("Picoc Exit Value:%i\n", PicocExitValue);
    }
+   
+   // free audio resources
+   endAudioEngine();
    
    // free loaded objects
    int i;

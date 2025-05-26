@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -pedantic -g -DUNIX_HOST
 
-OBJ = main.o loadImg.o picoc_modified/picoc.a
-LIBS = -lm -lreadline -lpthread -lGLEW -lGL -lglfw -ldl
+OBJ = main.o loadImg.o audio.o mp3.o picoc_modified/picoc.a
+LIBS = -lm -lreadline -lpthread -lGLEW -lGL -lglfw -ldl -lmp3lame
 
 BIN = prog
 
@@ -18,6 +18,12 @@ main.o: main.c
 
 loadImg.o: loadImg.c
 	$(CC) -c loadImg.c -o loadImg.o $(CFLAGS)
+
+audio.o: audio.c
+	$(CC) -c audio.c -o audio.o $(CFLAGS)
+
+mp3.o: mp3.c
+	$(CC) -c mp3.c -o mp3.o $(CFLAGS)
 
 subdir:
 	$(MAKE) -C picoc_modified
