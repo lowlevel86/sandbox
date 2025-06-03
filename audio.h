@@ -8,7 +8,6 @@ void playSound(int);
 void loopSound(int);
 
 void soundVolume(int, float);
-void panSound(int, float);
 
 void stopSound(int);
 void unloadSound(int);

@@ -314,10 +314,6 @@ void SOUND_VOLUME(struct ParseState *Parser, struct Value *ReturnValue, struct V
 {
    soundVolume(Param[0]->Val->Integer, Param[1]->Val->FP);
 }
-void PAN_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
-{
-   panSound(Param[0]->Val->Integer, Param[1]->Val->FP);
-}
 void STOP_SOUND(struct ParseState *Parser, struct Value *ReturnValue, struct Value **Param, int NumArgs) 
 {
    stopSound(Param[0]->Val->Integer);
@@ -415,7 +411,6 @@ struct LibraryFunction UnixFunctions[] =
    { PLAY_SOUND, "void playSound(int);" },
    { LOOP_SOUND, "void loopSound(int);" },
    { SOUND_VOLUME, "void soundVolume(int, float);" },
-   { PAN_SOUND, "void panSound(int, float);" },
    { STOP_SOUND, "void stopSound(int);" },
    { UNLOAD_SOUND, "void unloadSound(int);" },
    

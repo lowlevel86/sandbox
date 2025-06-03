@@ -333,6 +333,8 @@ void getScrollWheel(double *xscroll, double *yscroll)
 
 int forceShutdown()
 {
+   glfwPollEvents(); // poll events
+   
    if (glfwWindowShouldClose(window))
    return TRUE;
    
