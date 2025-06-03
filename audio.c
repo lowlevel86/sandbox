@@ -18,7 +18,13 @@ char ma_snd_occupied[MAX_SND_OBJS] = {FALSE};
 
 int iniAudioEngine()
 {
-   result = ma_engine_init(NULL, &engine);
+   ma_engine_config config = ma_engine_config_init();
+
+   config.periodSizeInFrames = 1024 * 4;
+   config.sampleRate = 22050;
+   config.channels = 2;
+   
+   result = ma_engine_init(&config, &engine);
    if (result != MA_SUCCESS)
    {
       printf("Failed to initialize audio engine.");
@@ -36,16 +42,17 @@ void endAudioEngine()
    if (noAudio)
    return;
    
-   endCapturePlayback();
-   ma_engine_uninit(&engine);
-   
    int i;
    for (i=0; i < MAX_SND_OBJS; i++)
    if (ma_snd_occupied[i])
    {
       ma_sound_stop(&ma_snd[i]);
       ma_sound_uninit(&ma_snd[i]);
+      ma_snd_occupied[i] = FALSE;
    }
+   
+   endCapturePlayback();
+   ma_engine_uninit(&engine);
 }
 
 void engineVolume(float vol)
@@ -101,20 +108,6 @@ void soundVolume(int id, float vol)
    return;
    
    ma_sound_set_volume(&ma_snd[id], vol);
-}
-
-void panSound(int id, float pan)
-{
-   if (noAudio)
-   return;
-   
-   if ((id < 0) || (id >= MAX_SND_OBJS))
-   return;
-   
-   if (ma_snd_occupied[id] == FALSE)
-   return;
-   
-   ma_sound_set_pan(&ma_snd[id], pan);
 }
 
 void loopSound(int id)

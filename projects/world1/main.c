@@ -111,12 +111,6 @@ while (keyPress(KEY_ESCAPE) == FALSE)
    if (distance < 3000)
    soundVolume(noiseID, 1.0 - distance/3000);
    
-   // pan sound determined by rotation
-   if (getObjLocZ(camImg) < 800.0)
-   panSound(noiseID, sin(turnLR * (M_PI / 180.0)) * 0.8 );
-   else
-   panSound(noiseID, -sin(turnLR * (M_PI / 180.0)) * 0.8 );
-   
    // load song if past rainbow
    if (getObjLocZ(camImg) < getObjLocZ(rainbow))
    playSound(songID);
